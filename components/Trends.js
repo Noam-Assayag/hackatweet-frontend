@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-export default function Trends() {
+export default function Trends({ refreshTrigger }) {
   const [trends, setTrends] = useState({});
   const router = useRouter();
 
@@ -13,7 +13,7 @@ export default function Trends() {
           setTrends(data.trends);
         }
       });
-  }, []);
+  }, [refreshTrigger]);
 
   const handleClick = (hashtag) => {
     router.push(`/hashtag/${hashtag}`);
@@ -23,7 +23,11 @@ export default function Trends() {
     <div>
       <h3>Trends</h3>
       {Object.entries(trends).map(([tag, count]) => (
-        <p key={tag} onClick={() => handleClick(tag)} style={{ cursor: 'pointer' }}>
+        <p
+          key={tag}
+          onClick={() => handleClick(tag)}
+          style={{ cursor: 'pointer' }}
+        >
           #{tag} · {count} tweet{count > 1 ? 's' : ''}
         </p>
       ))}

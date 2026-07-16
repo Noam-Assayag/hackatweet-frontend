@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react';
 import Tweet from './Tweet';
 
-export default function LastTweets({ refreshTrigger }) {
+export default function LastTweets({ refreshTrigger, hashtag }) {
   const [tweets, setTweets] = useState([]);
 
   useEffect(() => {
     fetchTweets();
-  }, [refreshTrigger]);
+  }, [refreshTrigger, hashtag]);
 
   const fetchTweets = () => {
-    fetch('http://localhost:3000/tweets')
+    const url = hashtag
+      ? `http://localhost:3000/tweets/hashtag/${hashtag}`
+      : 'http://localhost:3000/tweets';
+
+    fetch(url)
       .then((res) => res.json())
       .then((data) => {
         if (data.result) {
@@ -25,6 +29,10 @@ export default function LastTweets({ refreshTrigger }) {
   const handleLike = () => {
     fetchTweets();
   };
+
+  if (hashtag && tweets.length === 0) {
+    return <p>No tweets found with #{hashtag}</p>;
+  }
 
   return (
     <div>

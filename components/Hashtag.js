@@ -1,47 +1,30 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
-import { login, logout } from '../reducers/user';
+import { logout } from '../reducers/user';
 import LastTweets from './LastTweets';
 import Trends from './Trends';
 import styles from '../styles/Home.module.css';
 
-export default function Home() {
+export default function Hashtag() {
   const user = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
   const router = useRouter();
+  const { name } = router.query;
 
-  const [content, setContent] = useState('');
-  const [refreshKey, setRefreshKey] = useState(0);
+  const [search, setSearch] = useState('');
 
   const handleLogout = () => {
     dispatch(logout());
     router.push('/');
   };
 
-  const handleContentChange = (e) => {
-    if (e.target.value.length <= 280) {
-      setContent(e.target.value);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (search.trim()) {
+      router.push(`/hashtag/${search.trim()}`);
+      setSearch('');
     }
-  };
-
-  const handleSubmitTweet = () => {
-    if (!content.trim()) return;
-
-    fetch('http://localhost:3000/tweets', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token: user.token, content }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.result) {
-          setContent('');
-          setRefreshKey((k) => k + 1);
-        } else {
-          console.error('Erreur tweet:', data.error);
-        }
-      });
   };
 
   return (
@@ -70,30 +53,26 @@ export default function Home() {
 
       {/* Section centrale */}
       <div className={styles.middleSection}>
-        <div className={styles.tweetForm}>
-          <textarea
+        <form onSubmit={handleSearch}>
+          <input
+            type="text"
             className={styles.textarea}
-            value={content}
-            onChange={handleContentChange}
-            placeholder="What's happening?"
+            placeholder="Search hashtag..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
-          <p className={styles.charCount}>{content.length} / 280</p>
-          <button
-            className={styles.tweetButton}
-            onClick={handleSubmitTweet}
-            disabled={!content.trim()}
-          >
-            Tweet
+          <button type="submit" className={styles.tweetButton}>
+            Search
           </button>
-        </div>
+        </form>
 
-        <h3>Last tweets</h3>
-        <LastTweets refreshTrigger={refreshKey} />
+        <h3>#{name}</h3>
+        <LastTweets hashtag={name} />
       </div>
 
       {/* Section droite */}
       <div className={styles.rightSection}>
-        <Trends refreshTrigger={refreshKey} />
+        <Trends />
       </div>
     </div>
   );

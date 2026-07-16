@@ -1,22 +1,132 @@
-.main {
+.container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #151d27;
+  color: white;
+  font-family: Verdana, sans-serif;
+}
+
+.leftSection {
+  width: 25%;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: flex-start;
+  border-right: 1px solid #2f3a44;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.userInfo {
+  display: flex;
   align-items: center;
-  min-height: 100vh;
-  padding: 4rem 0;
+  gap: 12px;
+  margin-top: auto;
+  margin-bottom: 15px;
 }
 
-.title {
-  line-height: 1.15;
-  font-size: 4rem;
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #3690ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
+.avatarInner {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: white;
 }
 
-.title a:hover, .title a:focus, .title a:active {
-  text-decoration: underline;
+.userText {
+  display: flex;
+  flex-direction: column;
+}
+
+.displayName {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.username {
+  color: #8899a6;
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+.logoutButton {
+  padding: 10px 25px;
+  border-radius: 25px;
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  align-self: flex-start;
+}
+
+.logoutButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.middleSection {
+  width: 50%;
+  padding: 20px;
+  border-right: 1px solid #2f3a44;
+}
+
+.tweetForm {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.textarea {
+  background-color: #1c2733;
+  color: white;
+  border: 1px solid #2f3a44;
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 16px;
+  font-family: Verdana, sans-serif;
+  resize: none;
+  min-height: 80px;
+}
+
+.charCount {
+  align-self: flex-end;
+  font-size: 12px;
+  color: #8899a6;
+  margin: 5px 0;
+}
+
+.tweetButton {
+  align-self: flex-end;
+  padding: 10px 25px;
+  border-radius: 20px;
+  border: none;
+  background-color: #3690ed;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tweetButton:disabled {
+  background-color: #2f3a44;
+  cursor: not-allowed;
+}
+
+.rightSection {
+  width: 25%;
+  padding: 20px;
 }

@@ -1,6 +1,30 @@
 .tweet {
+  display: flex;
+  gap: 12px;
   border-bottom: 1px solid #2f3a44;
   padding: 15px 0;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #3690ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatarInner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.tweetBody {
+  flex: 1;
 }
 
 .author {

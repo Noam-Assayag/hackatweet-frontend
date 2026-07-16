@@ -1,4 +1,6 @@
 import { useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart, faTrash } from '@fortawesome/free-solid-svg-icons';
 import styles from '../styles/Tweet.module.css';
 
 export default function Tweet({ tweet, onDelete, onLike }) {
@@ -37,13 +39,26 @@ export default function Tweet({ tweet, onDelete, onLike }) {
 
   return (
     <div className={styles.tweet}>
-      <p className={styles.author}>@{tweet.author.username}</p>
-      <p className={styles.content}>{tweet.content}</p>
-      <div className={styles.actions}>
-        <button onClick={handleLike}>
-          {isLiked ? '❤️' : '🤍'} {tweet.likes.length}
-        </button>
-        {isMine && <button onClick={handleDelete}>🗑️ Supprimer</button>}
+      <div className={styles.avatar}>
+        <div className={styles.avatarInner}></div>
+      </div>
+      <div className={styles.tweetBody}>
+        <p className={styles.author}>@{tweet.author.username}</p>
+        <p className={styles.content}>{tweet.content}</p>
+        <div className={styles.actions}>
+          <button onClick={handleLike}>
+            <FontAwesomeIcon
+              icon={faHeart}
+              style={{ color: isLiked ? '#e0245e' : '#8899a6' }}
+            />{' '}
+            {tweet.likes.length}
+          </button>
+          {isMine && (
+            <button onClick={handleDelete}>
+              <FontAwesomeIcon icon={faTrash} />
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
