@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from '../reducers/user';
 import styles from '../styles/Modal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +9,8 @@ function SignIn({ closeModal }) {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const dispatch = useDispatch();
 
     const handleSignIn = () => {
         fetch('http://localhost:3000/users/signin', {
@@ -24,7 +28,10 @@ function SignIn({ closeModal }) {
                 console.log(data);
 
                 if (data.result) {
-                    console.log('Connexion réussie');
+                    dispatch(login({
+                        token: data.token,
+                        username: data.username,
+                    }));
                     closeModal();
                 } else {
                     alert(data.error);

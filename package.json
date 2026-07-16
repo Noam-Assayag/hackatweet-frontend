@@ -10,10 +10,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.3.1",
-<<<<<<< HEAD
     "@fortawesome/free-regular-svg-icons": "^7.3.1",
-=======
->>>>>>> 38960c6d010a5597e561115c0482dcbfaa3444cd
     "@fortawesome/free-solid-svg-icons": "^7.3.1",
     "@fortawesome/react-fontawesome": "^3.4.0",
     "@reduxjs/toolkit": "^2.12.0",
