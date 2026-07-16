@@ -1,7 +1,15 @@
+import { useState } from 'react';
+import SignUp from './SignUp';
+import SignIn from './SignIn';
 import styles from '../styles/Login.module.css';
 
 function Login() {
+
+  const [showSignUp, setShowSignUp] = useState(false);
+  const [showSignIn, setShowSignIn] = useState(false);
+
   return (
+
     <main className={styles.container}>
       <section className={styles.leftSection}>
         <img
@@ -28,7 +36,8 @@ function Login() {
 
         <h2 className={styles.subtitle}>Join Hackatweet today.</h2>
 
-        <button className={styles.signupButton}>
+        <button className={styles.signupButton} onClick={() =>
+          setShowSignUp(true)}>
           Sign up
         </button>
 
@@ -36,10 +45,17 @@ function Login() {
           Already have an account?
         </p>
 
-        <button className={styles.signinButton}>
+        <button className={styles.signinButton} onClick={() => setShowSignIn(true)}>
           Sign in
         </button>
       </section>
+      {/* Les modales */}
+      {showSignUp && (
+        <SignUp closeModal={() => setShowSignUp(false)} />
+      )}
+      {showSignIn && (
+        <SignIn closeModal={() => setShowSignIn(false)} />
+      )}
     </main>
   );
 }
