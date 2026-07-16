@@ -5,14 +5,12 @@ function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <Component {...pageProps} />
-        <title>Next.js App</title>
+        <title>Hackatweet</title>
       </Head>
+
       <Component {...pageProps} />
     </>
   );
 }
 
-
 export default App;
-
