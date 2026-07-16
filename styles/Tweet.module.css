@@ -1,0 +1,31 @@
+.tweet {
+  border-bottom: 1px solid #2f3a44;
+  padding: 15px 0;
+}
+
+.author {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.content {
+  margin-bottom: 10px;
+  word-wrap: break-word;
+}
+
+.actions {
+  display: flex;
+  gap: 15px;
+}
+
+.actions button {
+  background: none;
+  border: none;
+  color: #8899a6;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.actions button:hover {
+  color: #3690ed;
+}
