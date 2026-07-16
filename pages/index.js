@@ -5,3 +5,4 @@ function Index() {
 }
 
 export default Index;
+const test = 0
