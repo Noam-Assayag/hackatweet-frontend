@@ -1,10 +1,8 @@
 import Home from '../components/Home';
 
-//hello
 
 function Index() {
   return <Home />;
 }
 
 export default Index;
-//test
