@@ -31,6 +31,7 @@ function SignIn({ closeModal }) {
                     dispatch(login({
                         _id: data._id,
                         username: data.username,
+                        firstname: data.firstname,
                         token: data.token,
                     }));
                     closeModal();
