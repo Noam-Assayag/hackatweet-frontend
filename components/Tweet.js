@@ -9,6 +9,20 @@ export default function Tweet({ tweet, onDelete, onLike }) {
   const isMine = tweet.author._id === user._id;
   const isLiked = tweet.likes.includes(user.username);
 
+  const formatTweetContent = (content) => {
+    return content.split(/(#[a-zA-ZÀ-ÿ0-9_]+)/g).map((part, index) => {
+      if (part.startsWith('#')) {
+        return (
+          <span key={index} className={styles.hashtag}>
+            {part}
+          </span>
+        );
+      }
+
+      return part;
+    });
+  };
+
   const handleLike = () => {
     fetch(`http://localhost:3000/tweets/${tweet._id}/like`, {
       method: 'POST',
@@ -44,7 +58,7 @@ export default function Tweet({ tweet, onDelete, onLike }) {
       </div>
       <div className={styles.tweetBody}>
         <p className={styles.author}>@{tweet.author.username}</p>
-        <p className={styles.content}>{tweet.content}</p>
+        <p className={styles.content}>{formatTweetContent(tweet.content)}</p>
         <div className={styles.actions}>
           <button onClick={handleLike}>
             <FontAwesomeIcon
