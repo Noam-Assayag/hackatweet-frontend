@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Tweet from './Tweet';
 
-export default function LastTweets({ refreshTrigger, hashtag }) {
+export default function LastTweets({ refreshTrigger, hashtag, onTweetsChange }) {
   const [tweets, setTweets] = useState([]);
 
   useEffect(() => {
@@ -24,10 +24,12 @@ export default function LastTweets({ refreshTrigger, hashtag }) {
 
   const handleDelete = (id) => {
     setTweets(tweets.filter((t) => t._id !== id));
+    if (onTweetsChange) onTweetsChange();
   };
 
   const handleLike = () => {
     fetchTweets();
+    if (onTweetsChange) onTweetsChange();
   };
 
   if (hashtag && tweets.length === 0) {

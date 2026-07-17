@@ -13,6 +13,7 @@ export default function Hashtag() {
   const { name } = router.query;
 
   const [search, setSearch] = useState('');
+  const [refreshKey, setRefreshKey] = useState(0);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -67,12 +68,16 @@ export default function Hashtag() {
         </form>
 
         <h3>#{name}</h3>
-        <LastTweets hashtag={name} />
+        <LastTweets
+          hashtag={name}
+          refreshTrigger={refreshKey}
+          onTweetsChange={() => setRefreshKey((k) => k + 1)}
+        />
       </div>
 
       {/* Section droite */}
       <div className={styles.rightSection}>
-        <Trends />
+        <Trends refreshTrigger={refreshKey} />
       </div>
     </div>
   );

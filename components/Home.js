@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
-import { login, logout } from '../reducers/user';
+import { logout } from '../reducers/user';
 import LastTweets from './LastTweets';
 import Trends from './Trends';
 import styles from '../styles/Home.module.css';
@@ -88,7 +88,10 @@ export default function Home() {
         </div>
 
         <h3>Last tweets</h3>
-        <LastTweets refreshTrigger={refreshKey} />
+        <LastTweets
+          refreshTrigger={refreshKey}
+          onTweetsChange={() => setRefreshKey((k) => k + 1)}
+        />
       </div>
 
       {/* Section droite */}
