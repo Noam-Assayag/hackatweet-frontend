@@ -42,7 +42,7 @@ export default function Hashtag() {
             <div className={styles.avatarInner}></div>
           </div>
           <div className={styles.userText}>
-            <p className={styles.displayName}>{user.username}</p>
+            <p className={styles.displayName}>{user.firstname}</p>
             <p className={styles.username}>@{user.username}</p>
           </div>
         </div>
@@ -53,15 +53,15 @@ export default function Hashtag() {
 
       {/* Section centrale */}
       <div className={styles.middleSection}>
-        <form onSubmit={handleSearch}>
+        <form onSubmit={handleSearch} className={styles.searchForm}>
           <input
             type="text"
-            className={styles.textarea}
+            className={styles.searchInput}
             placeholder="Search hashtag..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <button type="submit" className={styles.tweetButton}>
+          <button type="submit" className={styles.searchButton}>
             Search
           </button>
         </form>

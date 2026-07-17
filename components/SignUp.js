@@ -1,14 +1,19 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 import styles from '../styles/Modal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-
+import { login } from '../reducers/user';
 
 function SignUp({ closeModal }) {
     const [firstname, setFirstname] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
+    const dispatch = useDispatch();
+    const router = useRouter();
 
     const handleSignUp = () => {
         fetch('http://localhost:3000/users/signup', {
@@ -24,20 +29,23 @@ function SignUp({ closeModal }) {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
-
                 if (data.result) {
-                    console.log('Compte créé');
+                    dispatch(login({
+                        _id: data._id,
+                        username: data.username,
+                        firstname: data.firstname,
+                        token: data.token,
+                    }));
                     closeModal();
+                    router.push('/');
                 } else {
-                    console.log(data.error);
+                    setError(data.error);
                 }
             })
             .catch(error => {
                 console.error('Erreur :', error);
             });
     };
-
 
     return (
         <div className={styles.overlay}>
@@ -80,6 +88,7 @@ function SignUp({ closeModal }) {
                         onChange={(event) => setPassword(event.target.value)}
                     />
                 </div>
+                {error && <p className={styles.error}>{error}</p>}
                 <button className={styles.submitButton} onClick={handleSignUp}>
                     Sign up
                 </button>

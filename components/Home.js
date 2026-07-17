@@ -59,7 +59,7 @@ export default function Home() {
             <div className={styles.avatarInner}></div>
           </div>
           <div className={styles.userText}>
-            <p className={styles.displayName}>{user.username}</p>
+            <p className={styles.displayName}>{user.firstname}</p>
             <p className={styles.username}>@{user.username}</p>
           </div>
         </div>

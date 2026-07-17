@@ -1,12 +1,18 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 import styles from '../styles/Modal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { login } from '../reducers/user';
 
 function SignIn({ closeModal }) {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const dispatch = useDispatch();
+    const router = useRouter();
 
     const handleSignIn = () => {
         fetch('http://localhost:3000/users/signin', {
@@ -21,11 +27,14 @@ function SignIn({ closeModal }) {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
-
                 if (data.result) {
-                    console.log('Connexion réussie');
+                    dispatch(login({
+                        _id: data._id,
+                        username: data.username,
+                        token: data.token,
+                    }));
                     closeModal();
+                    router.push('/');
                 } else {
                     alert(data.error);
                 }

@@ -130,3 +130,37 @@
   width: 25%;
   padding: 20px;
 }
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.searchInput {
+  background-color: #1c2733;
+  color: white;
+  border: 1px solid #2f3a44;
+  border-radius: 20px;
+  padding: 10px 18px;
+  font-size: 16px;
+  font-family: Verdana, sans-serif;
+  flex: 1;
+}
+
+.searchButton {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #3690ed;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.searchButton:hover {
+  background-color: #217cd8;
+}
